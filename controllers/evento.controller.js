@@ -91,7 +91,6 @@ exports.create = wrapAsync(async (req, res, next) => {
 exports.update = wrapAsync(async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(req.body);
     const EventoUp = await Evento.findByIdAndUpdate(id, req.body, {
       runValidators: true,
       new: true,

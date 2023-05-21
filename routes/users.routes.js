@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 const secretKey = 'clave_secreta';
 
 function authMiddleware(req, res, next) {
-    console.log(req.headers)
     const token = req.headers.authorization.split(' ')[1];
     try {
       const decoded = jwt.verify(token, secretKey);

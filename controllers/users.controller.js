@@ -21,7 +21,6 @@ function generateToken(user) {
     expiresIn: '24h',
   };
   const token = jwt.sign(payload, secretKey, options);
-  console.log(token);
   return token;
 }
 
@@ -201,7 +200,6 @@ exports.update = wrapAsync(async (req, res, next) => {
     });
     logger.access.debug("Acceso a controller 'update' ,esquema 'users'");
     if (UserUp) {
-      console.log({ UserUp });
       return res.json({ UserUp });
     } else {
       logger.error.error(
