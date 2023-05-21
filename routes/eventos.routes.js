@@ -21,6 +21,7 @@ function authMiddleware(req, res, next) {
 
 router.get("/", eventoController.findAll);
 router.get("/:id", eventoController.findId);
+router.get("/busqueda/:name", eventoController.findName);
 router.post("/",authMiddleware, eventoController.create);
 router.patch("/:id",authMiddleware, eventoController.update);
 router.delete("/:id",authMiddleware, eventoController.delete);

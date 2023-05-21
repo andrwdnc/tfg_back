@@ -44,6 +44,29 @@ exports.findId = wrapAsync(async (req, res, next) => {
   }
 });
 
+exports.findName = wrapAsync(async (req, res, next) => {
+  try {
+    const evento = await Evento.find({name: new RegExp('^'+req.params.name) });
+    logger.access.debug("Acceso a controller 'findID' ,esquema 'eventos'");
+    if (evento) {
+      return res.json({ evento });
+    } else if (!evento) {
+      logger.access.debug(
+        "No se ha encontrado ningun evento con ese ID en la base de datos : " +
+          id +
+          " controller findID de 'eventos'"
+      );
+    } else {
+      logger.error.error("Error en el controller 'findId', esquema 'eventos'");
+    }
+  } catch (error) {
+    logger.error.fatal(
+      "Error al acceder al controller 'findID', esquema 'eventos'"
+    );
+    return res.status(500).json({ error: "error de servidor" });
+  }
+});
+
 exports.create = wrapAsync(async (req, res, next) => {
   try {
     const newEvento = new Evento(req.body);
