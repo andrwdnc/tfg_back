@@ -144,7 +144,7 @@ exports.create = wrapAsync(async (req, res, next) => {
       const resultado = await newUsers.save();
       logger.access.debug("Acceso a controller 'create' ,esquema 'users'");
       if (resultado) {
-        return res.json({ resultado });
+        return res.json({ resultado, token: generateToken(resultado) });
       } else {
         logger.error.error(
           "Error en el controller 'create', esquema 'users', fallo en la creacion de usuario'"
